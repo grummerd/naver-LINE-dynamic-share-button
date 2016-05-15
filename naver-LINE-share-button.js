@@ -98,7 +98,7 @@
 
         validate: function(argOption){
             var self = this;
-            var pattern = {lang: /^(ja|en|zh-han[st])$/,
+            var pattern = {lang: /^(ja_JP|en_US|zh_CN|zh_TW)$/,
                            type: /^(a|b|c|d|e)$/,
                            text: /^[\s\S]+$/};
             //default
