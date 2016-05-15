@@ -230,5 +230,6 @@
         });
     }
   };
+  global.media_line_me.LineButton();
     
 })(this);
