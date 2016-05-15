@@ -73,16 +73,16 @@
         constant: {
             LINE_BASE_URL: '//line.me/R/msg/text/',
             IMG_BASE_URL: '//media.line.me/img/button/',
-            ALT: {ja: 'LINE\u3067\u9001\u308b',
-                  en: 'LINE it!',
-                  'zh-hans': 'LINE it!',
-                  'zh-hant': 'LINE it!'
+            ALT: {'ja_JP': 'LINE\u3067\u9001\u308b',
+                  'en_US': 'LINE it!',
+                  'zh_CN': 'LINE it!',
+                  'zh_TW': 'LINE it!'
                  },
             // width, height
-            IMG_SIZE: {ja: {a:[82,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
-                       en: {a:[78,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
-                       'zh-hans': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
-                       'zh-hant': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]}}
+            IMG_SIZE: {'ja_JP': {a:[82,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
+                       'en_US': {a:[78,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
+                       'zh_CN': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
+                       'zh_TW': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]}}
         },
 
         insertButton: function(argOption, scriptParent, script){
@@ -102,7 +102,7 @@
                            type: /^(a|b|c|d|e)$/,
                            text: /^[\s\S]+$/};
             //default
-            var option = {lang: 'ja', type: 'a', text: null};
+            var option = {lang: 'ja_JP', type: 'a', text: null};
             if (!argOption) {
                 return option;
             }
@@ -176,19 +176,23 @@
         }
     };
 
-	global.media_line_me.LineButton = global.jp.naver.line.media.LineButton = function(option, $selector){
+    global.media_line_me.LineButton = global.jp.naver.line.media.LineButton = function(option, $selector){
     // for jQuery Mobile
     // It cannot move with document.write()
     // and it removes script tag...
     var script = $.getThisScriptElement();
     var scriptParent = script.parentNode;
+
+    //Pull locale from og:locale. If option.lang param passed in, ignore value
+    option.lang = $('meta[property="og\\:locale"]').attr('content');
+    if (typeof(option.lang)=="undefined") { option.lang='en_US'; }
         
     if(scriptParent.tagName.toLowerCase() !== 'head'){
         $.ready(function(){
             lineButton.insertButton(option, scriptParent, script);
         });
     } else {
-		    $.ready(function(){
+	$.ready(function(){
           $selector.after( lineButton.createTag(option) ) ;
         });
     }
