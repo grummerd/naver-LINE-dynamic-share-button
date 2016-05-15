@@ -22,7 +22,10 @@ Naver LINE share button js module expects this block of code to be dropped into 
 * `lang` is hardcoded
 * can't specify an element (selector) to attach the share button to
 * `URL` is hardcoded as the current page url
-* The share button design is **UGLY**. Someone gift a glossy rounded corners button `79px * 27px` plz
+* The share button design is **UGLY**. Someone gift a glossy rounded corners LINE button plz
+
+![FB glossy rounded corners 79px * 27px](https://github.com/grummerd/naver-LINE-dynamic-share-button/blob/master/fb-share-button-glossy.png)
+
 
 Naver supplied API
 ---------------------
