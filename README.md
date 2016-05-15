@@ -16,6 +16,8 @@ new media_line_me.LineButton({"pc":false,"lang":"en","type":"a"});
 </span>
 ```
 
+These are the issues with using Naver LINE's stock javascript module
+
 * <script> blocks don't belong in the <body>
 * "lang" is hardcoded
 * can't specify an element (selector) to attach the share button to
