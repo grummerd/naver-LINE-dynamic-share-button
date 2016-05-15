@@ -1,4 +1,5 @@
-# naver-LINE-dynamic-share-button
+naver LINE dynamic share button
+================================
 
 Naver LINE provided share button is meant to just be dropped into a web site, but isn't suitable for integration in2 a html5 web app. Here's the fix!
 
@@ -33,7 +34,7 @@ Naver LINE js API provides one entry point,
 
 [Source: Naver LINE install docs](https://media.line.me/howto/en/)
 
-Which expects to attach an <a> and <img> into the <span> parent of the script block. Which can't be in the <head>. So NAVER gives only one option, copy and pasting the entire block of code **as is** in2 the <body>
+Which expects to attach an `<a>` and `<img>` into the `<span>` parent of the script block. Which can't be in the `<head>`. So NAVER gives only one option, copy and pasting the entire block of code **as is** in2 the `<body>`
 
 naver-LINE-dynamic-share-button
 ----------------------------------
