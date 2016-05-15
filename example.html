@@ -50,7 +50,11 @@
         $('meta[property="og\\:title"]').attr('content', strShareTitle);
         document.title=strShareTitle;
 
-        media_line_me.LineButton();
+        (function(d) {
+		var po = d.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'naver-LINE-share-button.js?v=20140411';
+		var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	})(document);
       });
     </script>
   </head>
