@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Naver LINE test page 0</title>
     <meta name="description" content="Naver Line is very popular in Korea and Japan" />
+    
+    <!-- Store selector of prev element. Used by Naver LINE share button -->
+    <meta name="naver-line-selector" content="" />
+    
     <link rel="canonical" href="http://www.usguyintokyo.com/promoter/sharing-test.html" />
     <meta property="og:site_name" content="DICK coupons" />
     <meta property="og:locale" 		  content="en_US" />
@@ -24,16 +28,18 @@
       //strLoc is the default. Read the url query string to override
       var strShareUrl, strShareDesc, strShareTitle, strLoc='en', LINELang;
 
-      //Use standard locale format [language]_[dialect or country] 
-      if (strLoc=="jp" || strLoc=="ja") {
-				LINELang="ja_JP";
-				$('meta[property="og\\:locale"]').attr('content', LINELang);
-			} elseif (strLoc=="en") {
-				LINELang="en_US";
-				$('meta[property="og\\:locale"]').attr('content', LINELang);
-			}
-
       $(document).ready(function() {
+        //Use standard locale format [language]_[dialect or country] 
+        if (strLoc=="jp" || strLoc=="ja") {
+		LINELang="ja_JP";
+		$('meta[property="og\\:locale"]').attr('content', LINELang);
+	} elseif (strLoc=="en") {
+		LINELang="en_US";
+		$('meta[property="og\\:locale"]').attr('content', LINELang);
+	}
+        //Store selector of prev element. Used by Naver LINE share button
+	$('meta[name="naver-line-selector"]').attr('content', '#after-this');
+        
         strShareUrl = 'http://usguy.tokyo/1q9m4Jm';
         strShareDesc = 'Naver Line is very popular in Korea and Japan 1';
         strShareTitle = 'Dynamic Naver LINE test page 1';
@@ -44,7 +50,7 @@
         $('meta[property="og\\:title"]').attr('content', strShareTitle);
         document.title=strShareTitle;
 
-        media_line_me.LineButton( {"pc":false,"type":"a","text":strShareTitle,"withUrl":true, "href": strShareUrl}, $('#after-this') );
+        media_line_me.LineButton();
       });
     </script>
   </head>
