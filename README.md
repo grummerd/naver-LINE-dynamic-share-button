@@ -9,10 +9,10 @@ What's the core issue that requires solving
 Naver LINE share button js module expects this block of code to be dropped into the `<body>`
 
     <span>
-      <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
-      <script type="text/javascript">
-        new media_line_me.LineButton({"pc":false,"lang":"en","type":"a"});
-      </script>
+        <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+        <script type="text/javascript">
+            new media_line_me.LineButton({"pc":false,"lang":"en","type":"a"});
+        </script>
     </span>
 
 
@@ -24,7 +24,13 @@ Naver LINE share button js module expects this block of code to be dropped into 
 * `URL` is hardcoded as the current page url
 * The share button design is **UGLY**. Someone gift a glossy rounded corners LINE button plz
 
-![FB glossy rounded corners 79px * 27px](https://github.com/grummerd/naver-LINE-dynamic-share-button/blob/master/fb-share-button-glossy.png)
+**Naver Line button rendered 78px x 20px**
+
+![Naver Line button 78px x 20px](http://media.line.me/img/button/en/78x20.png)
+
+**FB glossy rounded corners 79px x 27px**
+
+![FB glossy rounded corners 79px x 27px](https://github.com/grummerd/naver-LINE-dynamic-share-button/blob/master/fb-share-button-glossy.png)
 
 
 Naver supplied API
@@ -54,22 +60,29 @@ Meta property list
 - Dynamic storage of prev element selector `<meta name="naver-line-selector" content="" />`
 
 ##Example usage
-    <head>
-    <script src="jquery.js"></script>
-	<script src="naver-LINE-share-button.js?v=20140411" ></script>
-    <script>
-    jQuery(document).ready(function() {
-        $('meta[property="og\\:url"]').attr('content', 'https://www.google.com');
-        $('meta[property="og\\:title"]').attr('content', 'Lets exchange LINE');
-        $('meta[property="og\\:locale"]').attr('content', 'en_US');
-        $('meta[name="naver-line-selector"]').attr('content', '#after-this');
-        media_line_me.LineButton();
-    });
-    </script>
-    </head>
-    <body>
-    <div id="after-this"></div>
-    </body>
+    <!doctype html>
+    <html xmlns:og="http://ogp.me/ns#">
+        <head>
+            <meta name="naver-line-selector" content="" />
+            <meta property="og:locale"        content="en_US" />
+            <meta property="og:url"           content="http://www.google.com" />
+            <meta property="og:title"         content="Dynamic FB Share test page 0" />
+            <script src="jquery.js"></script>
+            <script src="naver-LINE-share-button.js?v=20140411" ></script>
+            <script>
+                jQuery(document).ready(function() {
+                    $('meta[property="og\\:url"]').attr('content', 'https://www.google.com');
+                    $('meta[property="og\\:title"]').attr('content', 'Lets exchange LINE');
+                    $('meta[property="og\\:locale"]').attr('content', 'en_US');
+                    $('meta[name="naver-line-selector"]').attr('content', '#after-this');
+                    media_line_me.LineButton();
+                });
+            </script>
+        </head>
+        <body>
+            <div id="after-this"></div>
+        </body>
+    </html>
 
 ## CSS styling
 
