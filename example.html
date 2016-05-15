@@ -7,6 +7,7 @@
     <meta name="description" content="Naver Line is very popular in Korea and Japan" />
     <link rel="canonical" href="http://www.usguyintokyo.com/promoter/sharing-test.html" />
     <meta property="og:site_name" content="DICK coupons" />
+    <meta property="og:locale" 		  content="en_US" />
     <meta property="og:url"           content="http://www.usguyintokyo.com/promoter/sharing-test.html" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Dynamic Naver LINE test page 0" />
@@ -20,7 +21,17 @@
     <script src="jquery.js"></script>
     <script type="text/javascript" src="naver-LINE-share-button.js?v=20140411" ></script>
     <script language="javascript">
-      var strShareUrl, strShareDesc, strShareTitle, strLoc='en', LINELang ='en';
+      //strLoc is the default. Read the url query string to override
+      var strShareUrl, strShareDesc, strShareTitle, strLoc='en', LINELang;
+
+      //Use standard locale format [language]_[dialect or country] 
+      if (strLoc=="jp" || strLoc=="ja") {
+				LINELang="ja_JP";
+				$('meta[property="og\\:locale"]').attr('content', LINELang);
+			} elseif (strLoc=="en") {
+				LINELang="en_US";
+				$('meta[property="og\\:locale"]').attr('content', LINELang);
+			}
 
       $(document).ready(function() {
         strShareUrl = 'http://usguy.tokyo/1q9m4Jm';
@@ -33,7 +44,7 @@
         $('meta[property="og\\:title"]').attr('content', strShareTitle);
         document.title=strShareTitle;
 
-        media_line_me.LineButton( {"pc":false,"lang":LINELang,"type":"a","text":strShareTitle,"withUrl":true, "href": strShareUrl}, $('#after-this') );
+        media_line_me.LineButton( {"pc":false,"type":"a","text":strShareTitle,"withUrl":true, "href": strShareUrl}, $('#after-this') );
       });
     </script>
   </head>
