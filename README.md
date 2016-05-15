@@ -17,13 +17,9 @@ new media_line_me.LineButton({"pc":false,"lang":"en","type":"a"});
 ```
 
 * <script> blocks don't belong in the <body>
-
 * "lang" is hardcoded
-
 * can't specify an element (selector) to attach the share button to
-
 * URL is hardcoded as the current page url
-
 * The share button design is **UGLY**. Someone gift a glossy rounded corners button 79px * 27px plz
 
 Naver supplied API
@@ -55,7 +51,6 @@ Can pass in both a dynamic lang, text and href
 The naver LINE share button consists of an <img> within an <a> CSS classes are provided for both
 
 * `.naver-line-a`
-
 * `.naver-line-img`
 
 
