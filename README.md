@@ -2,18 +2,18 @@
 
 Naver LINE provided share button is meant to just be dropped into a web site, but isn't suitable for integration in2 a html5 web app. Here's the fix!
 
-What's the core issue that  requires solving
+What's the core issue that requires solving
 -------------------------------------------------
 
 Naver LINE share button js module expects this block of code to be dropped into the `<body>`
 
-```javascript
-<span>
-  <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
-  <script type="text/javascript">
-    new media_line_me.LineButton({"pc":false,"lang":"en","type":"a"});
-  </script>
-</span>```
+    <span>
+      <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+      <script type="text/javascript">
+        new media_line_me.LineButton({"pc":false,"lang":"en","type":"a"});
+      </script>
+    </span>
+
 
 ##These are the issues with using Naver LINE's stock js module:
 
