@@ -66,7 +66,10 @@
         },
         isSmartphone: function(){
             return navigator.userAgent.match(/(iPhone|iPod|iPad|Android)/i);
-        }
+        },
+        insertAfter: function(newNode, referenceNode) {
+	    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	}
     };
     
     var lineButton = {
@@ -82,7 +85,12 @@
             IMG_SIZE: {'ja_JP': {a:[82,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
                        'en_US': {a:[78,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
                        'zh_CN': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]},
-                       'zh_TW': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]}}
+                       'zh_TW': {a:[84,20], b:[20,20], c:[30,30], d:[40,40], e:[36,60]}},
+            //Non-standard lang strings conversion table. Values on right coorespond to what's used on LINE web site
+            LANG_NS: {	'ja_JP': 'ja',
+			'en_US': 'en',
+			'zh_CN': 'zh-hans',
+			'zh_TW': 'zh-hant'}
         },
 
         insertButton: function(argOption, scriptParent, script){
@@ -102,7 +110,26 @@
                            type: /^(a|b|c|d|e)$/,
                            text: /^[\s\S]+$/};
             //default
-            var option = {lang: 'ja_JP', type: 'a', text: null};
+            var option = {lang: 'ja_JP', type: 'a', text: null, href: null, pc: false, withUrl: true};
+	    var element = document.querySelector('meta[property="og:locale"]');
+            var content = null;
+            content = element && element.getAttribute("content");
+            console.log("locale:", content);
+            if (typeof(content)!="object" && content!==null) { option.lang = content; }
+            content = null;
+            
+            element = document.querySelector('meta[property="og:url"]');
+            content = element && element.getAttribute("content");
+            console.log("url:", content);
+            if (typeof(content)!="object" && content!==null) { option.href = content; }
+            content = null;
+            
+            element = document.querySelector('meta[property="og:title"]');
+            content = element && element.getAttribute("content");
+            console.log("title:", content);
+            if (typeof(content)!="object" && content!==null) { option.title = content; }
+            content = null;
+
             if (!argOption) {
                 return option;
             }
@@ -114,8 +141,10 @@
                 }
             }
 
-            option.withUrl = !!argOption.withUrl;
-            option.pc = !!argOption.pc;
+            if (typeof (option.href)==undefined || (option.href===null && type(option.href)=="object") ) {
+		option.withUrl = !!argOption.withUrl;
+	    }
+            if (typeof (argOption.pc)!=undefined) { option.pc = !!argOption.pc; }
             
             return option;
         },
@@ -139,7 +168,7 @@
                     height: size[1],
                     alt: self.constant.ALT[option.lang]});
             
-            a.appendChild(img).className = 'naver-line-img';;
+            a.appendChild(img).className = 'naver-line-img';
             return a;
         },
 
@@ -156,8 +185,8 @@
             if (option.text) {
                 text = [option.text];
                 if(option.withUrl && typeof(option.href)!="undefined"){
-					text.push(option.href);
-				} else {
+			text.push(option.href);
+		} else {
                     text.push(document.location.href);
                 }
             } else {
@@ -171,29 +200,33 @@
             var C = self.constant;
             var size = C.IMG_SIZE[option.lang][option.type];
             return [C.IMG_BASE_URL,
-                    option.lang, '/',
+                    C.LANG_NS[option.lang], '/',
                     size[0], 'x', size[1], '.png'].join('');
         }
     };
 
-    global.media_line_me.LineButton = global.jp.naver.line.media.LineButton = function(option, $selector){
+    global.media_line_me.LineButton = global.jp.naver.line.media.LineButton = function(option){
     // for jQuery Mobile
     // It cannot move with document.write()
     // and it removes script tag...
     var script = $.getThisScriptElement();
     var scriptParent = script.parentNode;
 
-    //Pull locale from og:locale. If option.lang param passed in, ignore value
-    option.lang = $('meta[property="og\\:locale"]').attr('content');
-    if (typeof(option.lang)=="undefined") { option.lang='en_US'; }
-        
     if(scriptParent.tagName.toLowerCase() !== 'head'){
         $.ready(function(){
             lineButton.insertButton(option, scriptParent, script);
         });
     } else {
 	$.ready(function(){
-          $selector.after( lineButton.createTag(option) ) ;
+            //validate will check og: meta tags 
+	    var option2 = lineButton.validate(option);
+            var element = document.querySelector('meta[name="naver-line-selector"]');
+	    var selector = element && element.getAttribute("content");
+	    if (typeof(selector)!="undefined") {
+		var prevElement = document.querySelector(selector);
+		//Credit -- http://stackoverflow.com/a/4793630/2255936
+		$.insertAfter(lineButton.createTag(option2), prevElement);
+	    }
         });
     }
   };
