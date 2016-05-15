@@ -1,42 +1,43 @@
 <!doctype html>
-	<html xmlns:og="http://ogp.me/ns#">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Dynamic Naver LINE test page 0</title>
-		<meta name="description" content="Naver Line is very popular in Korea and Japan" />
-		<link rel="canonical" href="http://www.usguyintokyo.com/promoter/coupon_res_mobile.html" />
-		<meta property="og:site_name" content="DICK coupons" />
-		<meta property="og:url"           content="http://www.usguyintokyo.com/promoter/sharing-test.html" />
-		<meta property="og:type"          content="website" />
-		<meta property="og:title"         content="Dynamic Naver LINE test page 0" />
-		<meta property="og:description"   content="Possibily unchangable description 0" />
-		<meta property="og:image" 		  content="http://www.usguyintokyo.com/promoter/travel-suitcase-indexed.png" />
-		<style type="text/css">
-			.naver-line-a { float: left; margin-right: 0.5em; }
-			.naver-line-img {}
-		</style>
-		
-		<script src="jquery.js"></script>
-		<script type="text/javascript" src="naver-LINE-share-button.js?v=20140411" ></script>
-		<script language="javascript">
-			var strShareUrl, strShareDesc, strShareTitle, strLoc='en', LINELang ='en';
+<html xmlns:og="http://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Naver LINE test page 0</title>
+    <meta name="description" content="Naver Line is very popular in Korea and Japan" />
+    <link rel="canonical" href="http://www.usguyintokyo.com/promoter/coupon_res_mobile.html" />
+    <meta property="og:site_name" content="DICK coupons" />
+    <meta property="og:url"           content="http://www.usguyintokyo.com/promoter/sharing-test.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Dynamic Naver LINE test page 0" />
+    <meta property="og:description"   content="Possibily unchangable description 0" />
+    <meta property="og:image" 	      content="http://www.usguyintokyo.com/promoter/travel-suitcase-indexed.png" />
+    <style type="text/css">
+        .naver-line-a { float: left; margin-right: 0.5em; }
+        .naver-line-img {}
+    </style>
 
-			$(document).ready(function() {
-				strShareUrl = 'http://usguy.tokyo/1q9m4Jm';
-				strShareDesc = 'Naver Line is very popular in Korea and Japan 1';
-				strShareTitle = 'Dynamic Naver LINE test page 1';
-				$('link[rel="canonical"]').attr('href', strShareUrl);
-				$('meta[name="description"]').attr('content', strShareDesc);
-				$('meta[property="og\\:description"]').attr('content', strShareDesc);
-				$('meta[name="title"]').attr('content', strShareTitle);
-				$('meta[property="og\\:title"]').attr('content', strShareTitle);
-				document.title=strShareTitle;
-				
-				media_line_me.LineButton( {"pc":false,"lang":LINELang,"type":"a","text":strShareTitle,"withUrl":true, "href": strShareUrl}, $('#after-this') );
+    <script src="jquery.js"></script>
+    <script type="text/javascript" src="naver-LINE-share-button.js?v=20140411" ></script>
+    <script language="javascript">
+      var strShareUrl, strShareDesc, strShareTitle, strLoc='en', LINELang ='en';
+
+      $(document).ready(function() {
+        strShareUrl = 'http://usguy.tokyo/1q9m4Jm';
+        strShareDesc = 'Naver Line is very popular in Korea and Japan 1';
+        strShareTitle = 'Dynamic Naver LINE test page 1';
+        $('link[rel="canonical"]').attr('href', strShareUrl);
+        $('meta[name="description"]').attr('content', strShareDesc);
+        $('meta[property="og\\:description"]').attr('content', strShareDesc);
+        $('meta[name="title"]').attr('content', strShareTitle);
+        $('meta[property="og\\:title"]').attr('content', strShareTitle);
+        document.title=strShareTitle;
+
+        media_line_me.LineButton( {"pc":false,"lang":LINELang,"type":"a","text":strShareTitle,"withUrl":true, "href": strShareUrl}, $('#after-this') );
       });
-		</script>
-	</head>
-	<body>
+    </script>
+  </head>
+  <body>
     <div id="after-this"></div>
-	</body>
+  </body>
 </html>
