@@ -48,9 +48,7 @@ Which expects to attach an `<a>` and `<img>` into the `<span>` parent of the scr
 naver-LINE-dynamic-share-button
 ----------------------------------
 
-The single entry point now longer needs any params! Content is pulled from html5 meta properties
-
-    media_line_me.LineButton()
+Set some meta properties then the Naver LINE share button loads async
 
 Meta property list
 
@@ -68,14 +66,17 @@ Meta property list
             <meta property="og:url"           content="http://www.google.com" />
             <meta property="og:title"         content="Dynamic FB Share test page 0" />
             <script src="jquery.js"></script>
-            <script src="naver-LINE-share-button.js?v=20140411" ></script>
             <script>
                 jQuery(document).ready(function() {
                     $('meta[property="og\\:url"]').attr('content', 'https://www.google.com');
                     $('meta[property="og\\:title"]').attr('content', 'Lets exchange LINE');
                     $('meta[property="og\\:locale"]').attr('content', 'en_US');
                     $('meta[name="naver-line-selector"]').attr('content', '#after-this');
-                    media_line_me.LineButton();
+                    (function(d) {
+		                var po = d.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		                po.src = 'naver-LINE-share-button.js?v=20140411';
+		                var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	                })(document);
                 });
             </script>
         </head>
@@ -83,6 +84,11 @@ Meta property list
             <div id="after-this"></div>
         </body>
     </html>
+
+**Please note**
+`naver-LINE-share-button.js` is pure `javascript`. JQuery just used for the **ready** event handler 
+    jQuery(document).ready(function() {
+    });
 
 ## CSS styling
 
