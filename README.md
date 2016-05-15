@@ -42,27 +42,38 @@ Which expects to attach an `<a>` and `<img>` into the `<span>` parent of the scr
 naver-LINE-dynamic-share-button
 ----------------------------------
 
-The single entry point now accepts a selector. LINE share button is placed **after** the $selector element
+The single entry point now longer needs any params! Content is pulled from html5 meta properties
 
-    media_line_me.LineButton(option, $selector)
+    media_line_me.LineButton()
 
+Meta property list
+
+- Dynamic storage of option.text: `<meta property="og:title"         content="">`
+- Dynamic storage of option.href: `<meta property="og:url"           content="">`
+- Dynamic storage of option.lang: `<meta property="og:locale"           content="">`
+- Dynamic storage of prev element selector `<meta name="naver-line-selector" content="" />`
 
 ##Example usage
-
-
-    media_line_me.LineButton( {"pc":false,"lang":gplusLang,"type":"a","text":strShareTitle,"withUrl":true, "href": strShareUrl}, $('#click-to-fb-share') );
-
-
-Can pass in both a dynamic lang, text and href
+    <head>
+    <script src="jquery.js"></script>
+	<script src="naver-LINE-share-button.js?v=20140411" ></script>
+    <script>
+    jQuery(document).ready(function() {
+        $('meta[property="og\\:url"]').attr('content', 'https://www.google.com');
+        $('meta[property="og\\:title"]').attr('content', 'Lets exchange LINE');
+        $('meta[property="og\\:locale"]').attr('content', 'en_US');
+        $('meta[name="naver-line-selector"]').attr('content', '#after-this');
+        media_line_me.LineButton();
+    });
+    </script>
+    </head>
+    <body>
+    <div id="after-this"></div>
+    </body>
 
 ## CSS styling
 
 The naver LINE share button consists of an <img> within an <a> CSS classes are provided for both
 
-
 * `.naver-line-a`
 * `.naver-line-img`
-
-
-
-
