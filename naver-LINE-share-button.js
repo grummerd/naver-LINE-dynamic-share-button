@@ -33,8 +33,21 @@
         },
         getThisScriptElement: function() {
             // returns caller script element node if it is called in loading
+            // this file name must contain the word, 'naver'
             var scripts = document.getElementsByTagName('script');
-            return scripts[scripts.length -1];
+            var scriptIndex=0, scriptSrc, bolFound=false;
+            for(var i=0;i<scripts.length;i++) {
+				scriptSrc = scripts[i].src;
+				if (scriptSrc.toLowerCase().indexOf("naver") >= 0) {
+					scriptIndex = i;
+					bolFound = true;
+				}
+			}
+			if (!bolFound) {
+				console.log("WARNING this javascript file name should contain the word 'naver'");
+				console.log("getThisScriptElement", scriptIndex, "script src", scripts[scriptIndex].src );
+			}
+            return scripts[scriptIndex];
         },
         each: function(array, fn) {
             for ( var i = 0, l = array.length; i < l; i++ ) {
